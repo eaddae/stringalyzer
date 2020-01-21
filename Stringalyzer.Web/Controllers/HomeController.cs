@@ -10,29 +10,28 @@ namespace Stringalyzer.Web.Controllers
 {
     public class HomeController : Controller
     {
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(string input)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            var analyzer = new Analyzer(input);
+            StringalyzerViewModel vm = new StringalyzerViewModel()
+            {
+                TotalUniqueWords = analyzer.TotalUniqueWords,
+                TotalWords = analyzer.TotalWords,
+                UniqueWordCounts = analyzer.UniqueWordCounts,
+                UniqueWords = analyzer.UniqueWords
+            };
+            return View(vm);
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

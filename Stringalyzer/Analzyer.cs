@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Stringalyzer
 {
-    public class Analyzer
+    public class Analyzer : IAnalyzer
     {
         private readonly string _input;
         private readonly string[] _inputTokens;
