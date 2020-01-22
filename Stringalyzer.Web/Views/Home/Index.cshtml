@@ -8,6 +8,16 @@
         <input type="submit" value="ANALYZE"/>
     </form>
     <div id="results">
-        @Html.DisplayForModel()
+        <p style="white-space:pre;">
+        @if (Model != null)
+        {
+            Write($"Total Words: {Model.TotalWords}\n");
+            Write($"Total Unique Words: {Model.TotalUniqueWords}\n");
+            foreach (var u in Model.UniqueWordCounts)
+            {
+                Write($"{u.Key} {u.Value}\n");
+            }
+        }
+         </p>
     </div>
 </div>
